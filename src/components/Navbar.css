@@ -1,0 +1,113 @@
+.navbar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border-dim);
+  padding: 0 20px;
+  font-family: 'Inter', sans-serif;
+  position: sticky;
+  top: 64px;
+  /* sits right below the 64px header */
+  z-index: 90;
+  box-shadow: var(--shadow-sm);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.navbar__list {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  justify-content: flex-start;
+  /* Make mobile-friendly tabs scrolling */
+  overflow-x: auto;
+  scrollbar-width: none; /* Firefox */
+}
+
+.navbar__list::-webkit-scrollbar {
+  display: none; /* Safari/Chrome */
+}
+
+/* ── Each nav button ── */
+.navbar__item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 14px;
+  height: 44px;
+  background: transparent;
+  border: none;
+  border-radius: 8px 8px 0 0;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-dim);
+  white-space: nowrap;
+  transition: color 0.2s ease, background 0.2s ease;
+  outline: none;
+}
+
+.navbar__item:hover {
+  color: var(--primary);
+  background: var(--primary-glow);
+}
+
+.navbar__item--active {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* ── Icon ── */
+.navbar__icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.navbar__icon svg {
+  width: 15px;
+  height: 15px;
+  transition: stroke 0.2s ease;
+}
+
+/* ── Active underline indicator ── */
+.navbar__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
+  height: 2.5px;
+  border-radius: 999px 999px 0 0;
+  background: var(--primary);
+  animation: slide-in 0.2s ease;
+}
+
+@keyframes slide-in {
+  from {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* ════════════════════════════
+   RESPONSIVENESS
+════════════════════════════ */
+@media (max-width: 768px) {
+  .navbar__item {
+    height: 38px;
+    font-size: 0.75rem;
+    padding: 0 10px;
+  }
+  .navbar__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+}

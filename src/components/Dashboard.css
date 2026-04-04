@@ -1,0 +1,284 @@
+.dashboard {
+  padding: 32px 28px 24px;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Greeting ── */
+.dashboard__greeting {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 24px 0;
+  letter-spacing: -0.01em;
+}
+
+/* ── Cards row — equal widths ── */
+.dashboard__cards {
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+/* ── Two-column chart row ── */
+.dashboard__chart-row {
+  display: flex;
+  gap: 18px;
+  margin-top: 20px;
+  align-items: stretch;
+}
+
+.dashboard__chart-main {
+  flex: 3;
+  min-width: 0;
+  display: flex;
+}
+
+.dashboard__chart-main .chart-card {
+  margin-top: 0;
+}
+
+.dashboard__chart-side {
+  flex: 2;
+  min-width: 240px;
+  display: flex;
+}
+
+/* ── Every card — same fixed size, left-aligned ── */
+.balance-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 24px;
+  flex: 1 1 0;           /* equal flex grow so all cards share the same width */
+  min-width: 220px;
+  max-width: 340px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.25s ease;
+  box-sizing: border-box;
+}
+
+.balance-card:hover {
+  box-shadow: 0 6px 20px var(--primary-glow);
+  transform: translateY(-2px);
+  background: var(--bg-card-hover);
+}
+
+/* ════════════════════════════
+   SHARED ELEMENTS
+════════════════════════════ */
+
+/* ── Upper label ── */
+.card__label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.01em;
+}
+
+.card__label--stat {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-main);
+  margin-top: 4px;
+}
+
+/* ── Amount ── */
+.card__amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.card__amount--stat {
+  font-size: 1.9rem;
+}
+
+/* ════════════════════════════
+   BALANCE CARD (left)
+════════════════════════════ */
+
+/* Amount + inline % on same row */
+.card__amount-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Inline % change next to the amount */
+.card__change {
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Account number row */
+.card__account-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 2px;
+}
+
+.card__account-num {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Inline copy button */
+.card__copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-main);
+  background: var(--bg-app);
+  border: 1.5px solid var(--border-dim);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.card__copy-btn:hover,
+.card__copy-btn--done {
+  background: var(--primary-glow);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+/* Action buttons row */
+.card__actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  width: 100%;
+}
+
+.btn {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 0.83rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+}
+
+.btn--primary {
+  background: var(--primary);
+  color: #ffffff;
+  box-shadow: 0 2px 8px var(--primary-glow);
+}
+
+.btn--primary:hover {
+  opacity: 0.88;
+  box-shadow: 0 4px 14px var(--primary-glow);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+
+.btn--outline:hover {
+  background: var(--primary-glow);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* ════════════════════════════
+   STAT CARDS (savings / exp)
+════════════════════════════ */
+
+/* Icon bubble — top-left, above label */
+.card__icon-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.card__icon-bubble svg {
+  width: 17px;
+  height: 17px;
+}
+
+.icon--savings {
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+}
+
+.icon--exp {
+  background: #fff1f2;
+  border: 1px solid #fecdd3;
+  color: #e11d48;
+}
+
+/* % change pill at the bottom of stat cards */
+.card__change-stat {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: auto;          /* push to bottom of card */
+}
+
+/* ── Shared colour classes ── */
+.change--up {
+  color: #16a34a;
+}
+
+.change--down {
+  color: #e11d48;
+}
+
+.change__sub {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* ════════════════════════════
+   RESPONSIVENESS
+════════════════════════════ */
+@media (max-width: 1024px) {
+  .dashboard__chart-row {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 24px 16px;
+  }
+  .dashboard__cards {
+    flex-direction: column;
+  }
+  .balance-card {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}

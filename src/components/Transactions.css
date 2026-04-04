@@ -1,0 +1,229 @@
+/* ── Card shell ── */
+.txn-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 24px 28px;
+  margin-top: 20px;
+  box-shadow: var(--shadow-sm);
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+}
+
+/* ── Card header ── */
+.txn-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.txn-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 4px 0;
+}
+
+.txn-card__sub {
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.txn-card__count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: var(--bg-app);
+  border: 1px solid var(--border-dim);
+  border-radius: 999px;
+  padding: 4px 14px;
+}
+
+/* ── Column headings ── */
+.txn-table-head {
+  display: grid;
+  grid-template-columns: 1fr 160px 150px 140px;
+  padding: 0 12px 11px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.txn-col--right {
+  text-align: right;
+}
+
+/* ── List ── */
+.txn-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Single row ── */
+.txn-row {
+  display: grid;
+  grid-template-columns: 1fr 160px 150px 140px;
+  align-items: center;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--border-light);
+  border-radius: 8px;
+  transition: background 0.15s ease;
+}
+
+.txn-row:last-child {
+  border-bottom: none;
+}
+
+.txn-row:hover {
+  background: var(--bg-app);
+}
+
+/* Transaction name */
+.txn-row__name {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-main);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+}
+
+/* Category pill */
+.txn-row__cat {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+/* Date */
+.txn-row__date {
+  font-size: 0.95rem;
+  color: var(--text-dim);
+}
+
+/* Amount */
+.txn-row__amount {
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-align: right;
+}
+
+.txn-row__amount--credit {
+  color: #16a34a;
+}
+
+.txn-row__amount--debit {
+  color: var(--text-main);
+}
+
+.txn-row__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.txn-delete-btn {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  opacity: 0;
+  /* hidden by default */
+}
+
+.txn-row:hover .txn-delete-btn {
+  opacity: 1;
+}
+
+.txn-delete-btn:hover {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.txn-delete-btn svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* ── Footer — left aligned ── */
+.txn-card__footer {
+  display: flex;
+  justify-content: flex-start;
+  padding-top: 20px;
+}
+
+.txn-view-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 22px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--primary);
+  background: var(--primary-glow);
+  border: 1.5px solid var(--primary);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.txn-view-all svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.2s ease;
+}
+
+.txn-view-all:hover {
+  background: var(--primary-glow);
+  filter: brightness(1.1);
+}
+
+.txn-view-all:hover svg {
+  transform: translateX(3px);
+}
+
+.txn-view-all:active {
+  transform: scale(0.97);
+}
+
+/* ════════════════════════════
+   RESPONSIVENESS
+════════════════════════════ */
+@media (max-width: 768px) {
+
+  .txn-table-head,
+  .txn-row {
+    grid-template-columns: 1fr 90px 100px;
+  }
+
+  .txn-table-head>span:nth-child(2),
+  .txn-row__cat {
+    display: none !important;
+  }
+
+  .txn-table-head>span:nth-child(3),
+  .txn-row__date {
+    text-align: right;
+    padding-right: 12px;
+  }
+}

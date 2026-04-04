@@ -1,0 +1,158 @@
+.sub-burn {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 100%;
+}
+
+.sub-burn__top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.sub-burn__ico {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--primary-glow);
+  border-radius: 10px;
+  color: #ef4444;
+}
+
+.sub-burn__ico svg {
+  width: 20px;
+  height: 20px;
+}
+
+.sub-burn__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.sub-burn__hero {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+}
+
+.sub-burn__chart {
+  flex: 0 0 200px;
+  height: 200px;
+  width: 100%;
+}
+
+.sub-burn__stats {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sub-burn__total-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.sub-burn__total-val {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ef4444;
+  letter-spacing: -0.02em;
+}
+
+.sub-burn__total-val span {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.sub-burn__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sub-burn__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+
+.sub-burn__item-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  color: var(--text-dim);
+}
+
+.sub-burn__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.sub-burn__item-val {
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.sub-burn__warning {
+  background: var(--bg-app);
+  border: 1px solid var(--border-dim);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-top: 4px;
+}
+
+.sub-burn__warning svg {
+  width: 16px;
+  height: 16px;
+  color: #f97316;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.sub-burn__warning p {
+  font-size: 0.76rem;
+  line-height: 1.4;
+  color: var(--text-dim);
+  margin: 0;
+  font-weight: 500;
+}
+
+@media (max-width: 1100px), (max-width: 640px) {
+  .sub-burn__hero {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .sub-burn__stats {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+  }
+
+  .sub-burn__item-info {
+    justify-content: center;
+  }
+}

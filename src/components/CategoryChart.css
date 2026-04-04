@@ -1,0 +1,177 @@
+/* ── Card shell ── */
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-dim);
+  border-radius: 16px;
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  height: 100%;
+}
+
+.cat-card__content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 16px;
+  align-items: stretch;
+  flex: 1;
+}
+
+/* ── Left column ── */
+.cat-card__left {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.cat-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin: 0 0 2px 0;
+}
+
+.cat-card__sub {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin: 0 0 24px 0;
+}
+
+.cat-card__total {
+  margin: 8px 0 20px;
+}
+
+.cat-card__total-label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.cat-card__total-amount {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+.cat-card__total-amount span {
+  font-size: 1.1rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+/* ── Legend list ── */
+.cat-legend {
+  list-style: none;
+  margin: 0 0 24px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 250px;
+}
+
+.cat-legend__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cat-legend__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.cat-legend__name {
+  flex: 1;
+  font-size: 0.85rem;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.cat-legend__pct {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+/* ── View More Button ── */
+.cat-btn {
+  align-self: stretch;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--primary);
+  color: var(--primary);
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cat-btn:hover {
+  background: var(--primary-glow);
+}
+
+/* ── Right column (Chart itself) ── */
+.cat-card__right {
+  flex: 0 0 180px;
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+/* ── Custom tooltip ── */
+.cat-tooltip {
+  background: var(--bg-card);
+  border: 1.2px solid var(--border-dim);
+  border-radius: 10px;
+  padding: 8px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'Inter', sans-serif;
+  box-shadow: var(--shadow-md);
+}
+
+.cat-tooltip__name {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.cat-tooltip__amount {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+@media (max-width: 640px) {
+  .cat-card__content {
+    flex-direction: column;
+  }
+  .cat-card__right {
+    min-height: auto;
+    height: 200px;
+  }
+}
