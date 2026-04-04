@@ -54,8 +54,68 @@ function CopyIconSm() {
   );
 }
 
+/* ── Action Modal ── */
+function ActionModal({ isOpen, onClose, type, onConfirm }) {
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState('');
+
+  if (!isOpen) return null;
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!name || !amount) return;
+    onConfirm(name, parseFloat(amount));
+    setName('');
+    setAmount('');
+  };
+
+  const isSend = type === 'send';
+
+  return (
+    <div className="dash-modal-overlay" onClick={onClose}>
+      <motion.div 
+        className="dash-modal" 
+        onClick={e => e.stopPropagation()}
+        initial={{ opacity: 0, scale: 0.9, y: 20 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+      >
+        <h3 className="dash-modal__title">{isSend ? 'Send Money' : 'Request Money'}</h3>
+        <form className="dash-modal__form" onSubmit={handleSubmit}>
+          <div className="dash-modal__field">
+            <label className="dash-modal__label">{isSend ? 'Recipient Name' : 'Sender Name'}</label>
+            <input 
+              className="dash-modal__input" 
+              placeholder="e.g. John Doe" 
+              value={name}
+              onChange={e => setName(e.target.value)}
+              autoFocus
+            />
+          </div>
+          <div className="dash-modal__field">
+            <label className="dash-modal__label">Amount ($)</label>
+            <input 
+              className="dash-modal__input" 
+              type="number" 
+              step="0.01" 
+              placeholder="0.00" 
+              value={amount}
+              onChange={e => setAmount(e.target.value)}
+            />
+          </div>
+          <div className="dash-modal__footer">
+            <button type="button" className="dash-modal__btn dash-modal__btn--cancel" onClick={onClose}>Cancel</button>
+            <button type="submit" className="dash-modal__btn dash-modal__btn--confirm">
+              {isSend ? 'Send Now' : 'Request Now'}
+            </button>
+          </div>
+        </form>
+      </motion.div>
+    </div>
+  );
+}
+
 /* ── Balance card (left) ── */
-function MyBalanceCard({ role, balance, index }) {
+function MyBalanceCard({ role, balance, index, onAction }) {
   const isViewer = role === 'viewer';
   const [copied, setCopied] = useState(false);
   const rawAccountNum = '6549  7329  9821  2472';
@@ -104,8 +164,26 @@ function MyBalanceCard({ role, balance, index }) {
       </div>
 
       <div className="card__actions">
-        <button className="btn btn--primary" id="btn-send-money" disabled={isViewer} style={isViewer ? { opacity: 0.5, cursor: 'not-allowed' } : {}} title={isViewer ? "Disabled for viewers" : ""}>Send money</button>
-        <button className="btn btn--outline" id="btn-request-money" disabled={isViewer} style={isViewer ? { opacity: 0.5, cursor: 'not-allowed' } : {}} title={isViewer ? "Disabled for viewers" : ""}>Request money</button>
+        <button 
+          className="btn btn--primary" 
+          id="btn-send-money" 
+          disabled={isViewer} 
+          style={isViewer ? { opacity: 0.5, cursor: 'not-allowed' } : {}} 
+          title={isViewer ? "Disabled for viewers" : ""}
+          onClick={() => onAction('send')}
+        >
+          Send money
+        </button>
+        <button 
+          className="btn btn--outline" 
+          id="btn-request-money" 
+          disabled={isViewer} 
+          style={isViewer ? { opacity: 0.5, cursor: 'not-allowed' } : {}} 
+          title={isViewer ? "Disabled for viewers" : ""}
+          onClick={() => onAction('request')}
+        >
+          Request money
+        </button>
       </div>
     </motion.div>
   );
@@ -141,10 +219,39 @@ function StatCard({ id, label, amount, change, icon, iconClass, index }) {
 
 /* ── Root ── */
 export default function Dashboard({ onNavigate }) {
-  const { role, metrics } = useApp();
+  const { role, metrics, addTransaction, transactions } = useApp();
+  const [activeModal, setActiveModal] = useState(null); // 'send', 'request', or null
+
+  const handleAction = (type, name, amount) => {
+    const isSend = type === 'send';
+    const finalAmount = isSend ? -Math.abs(amount) : Math.abs(amount);
+    
+    // Auto-select latest date from existing transactions to maintain visual order
+    const latestDate = transactions.length > 0 
+      ? [...transactions].sort((a,b) => b.date.localeCompare(a.date))[0].date 
+      : new Date().toISOString().split('T')[0];
+
+    addTransaction({
+      name: isSend ? `Sent to ${name}` : `Requested from ${name}`,
+      category: 'Transfer',
+      date: latestDate,
+      amount: finalAmount,
+      method: 'Digital Wallet',
+      status: 'Success'
+    });
+    
+    setActiveModal(null);
+  };
 
   return (
     <section className="dashboard" aria-label="Dashboard overview">
+      <ActionModal 
+        isOpen={!!activeModal} 
+        onClose={() => setActiveModal(null)} 
+        type={activeModal}
+        onConfirm={(name, amount) => handleAction(activeModal, name, amount)}
+      />
+
       <motion.h1 
         className="dashboard__greeting"
         initial={{ opacity: 0, x: -20 }}
@@ -155,7 +262,12 @@ export default function Dashboard({ onNavigate }) {
       </motion.h1>
 
       <div className="dashboard__cards">
-        <MyBalanceCard role={role} balance={metrics.totalBal} index={1} />
+        <MyBalanceCard 
+          role={role} 
+          balance={metrics.totalBal} 
+          index={1} 
+          onAction={(type) => setActiveModal(type)}
+        />
         <StatCard
           id="savings"
           label="Monthly Income"
