@@ -238,7 +238,7 @@ export default function Dashboard({ onNavigate }) {
       amount: finalAmount,
       method: 'Digital Wallet',
       status: 'Success'
-    });
+    }, isSend ? `Money sent to ${name}!` : `Money request sent to ${name}.`);
     
     setActiveModal(null);
   };
@@ -316,7 +316,7 @@ export default function Dashboard({ onNavigate }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
       >
-        <Transactions />
+        <Transactions onNavigate={onNavigate} />
       </motion.div>
     </section>
   );

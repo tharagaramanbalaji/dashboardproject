@@ -46,6 +46,14 @@ export function AppProvider({ children }) {
   // --- User / Auth State ---
   const [role, setRole] = useState('admin');
 
+  // --- Toast State ---
+  const [toast, setToast] = useState(null);
+
+  const showToast = (message, type = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   // --- Theme State ---
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('app_theme');
@@ -84,9 +92,10 @@ export function AppProvider({ children }) {
   }, [transactions]);
 
   // Actions
-  const addTransaction = (txn) => {
+  const addTransaction = (txn, customMsg) => {
     const newTxn = { ...txn, id: Date.now() };
     setTransactions(prev => [newTxn, ...prev]);
+    showToast(customMsg || `${txn.amount > 0 ? 'Income' : 'Expense'} record added successfully.`);
   };
 
   const deleteTransaction = (id) => {
@@ -133,7 +142,9 @@ export function AppProvider({ children }) {
     deleteTransaction,
     saveTransactions,
     theme,
-    toggleTheme
+    toggleTheme,
+    toast,
+    showToast
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

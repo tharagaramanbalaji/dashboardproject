@@ -15,7 +15,7 @@ function fmtDate(iso) {
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
-export default function Transactions() {
+export default function Transactions({ onNavigate }) {
   const { transactions: allTransactions } = useApp();
   
   const recentTransactions = [...allTransactions]
@@ -65,7 +65,11 @@ export default function Transactions() {
       </ul>
 
       <div className="txn-card__footer">
-        <button id="btn-view-all-txn" className="txn-view-all">
+        <button 
+          id="btn-view-all-txn" 
+          className="txn-view-all" 
+          onClick={() => onNavigate && onNavigate('transactions')}
+        >
           View all transactions
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"
             strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

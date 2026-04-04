@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useApp } from './context/AppContext';
 import Header from './components/Header';
 import Navbar from './components/Navbar';
 import Dashboard from './components/Dashboard';
@@ -21,8 +22,28 @@ const pageTransition = {
   damping: 30
 };
 
+function Toast({ message, type }) {
+  if (!message) return null;
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 50, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: 30, scale: 0.95 }}
+      className={`toast-notification toast--${type}`}
+    >
+      <div className="toast-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+      </div>
+      <span className="toast-msg">{message}</span>
+    </motion.div>
+  );
+}
+
 function App() {
   const [page, setPage] = useState('overview');
+  const { toast } = useApp();
 
   return (
     <>
@@ -46,6 +67,9 @@ function App() {
           </motion.div>
         </AnimatePresence>
       </main>
+      <AnimatePresence>
+        {toast && <Toast message={toast.message} type={toast.type} />}
+      </AnimatePresence>
     </>
   );
 }
