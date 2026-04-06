@@ -170,6 +170,7 @@
   .cat-card__content {
     flex-direction: column;
   }
+
   .cat-card__right {
     min-height: auto;
     height: 200px;
