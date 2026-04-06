@@ -140,7 +140,14 @@ function MyBalanceCard({ role, balance, index, onAction }) {
       <span className="card__label">My Balance</span>
 
       <div className="card__amount-row">
-        <span className="card__amount">${balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
+        <motion.span 
+          key={balance}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="card__amount"
+        >
+          ${balance.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        </motion.span>
         <span className="card__change change--up">+5.7% compare to last month</span>
       </div>
 
@@ -226,15 +233,13 @@ export default function Dashboard({ onNavigate }) {
     const isSend = type === 'send';
     const finalAmount = isSend ? -Math.abs(amount) : Math.abs(amount);
     
-    // Auto-select latest date from existing transactions to maintain visual order
-    const latestDate = transactions.length > 0 
-      ? [...transactions].sort((a,b) => b.date.localeCompare(a.date))[0].date 
-      : new Date().toISOString().split('T')[0];
+    // Use current computer date for real-time accuracy
+    const today = new Date().toISOString().split('T')[0];
 
     addTransaction({
       name: isSend ? `Sent to ${name}` : `Requested from ${name}`,
-      category: 'Transfer',
-      date: latestDate,
+      category: isSend ? 'Shopping' : 'Income', // More descriptive categories
+      date: today,
       amount: finalAmount,
       method: 'Digital Wallet',
       status: 'Success'

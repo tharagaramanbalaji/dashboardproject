@@ -11,7 +11,21 @@
   justify-content: space-between;
   overflow: hidden;
   position: relative;
+  transition: all 0.25s ease;
   box-sizing: border-box;
+}
+
+.portfolio-wave.is-boosting {
+  animation: card-pulse 0.4s ease-in-out infinite;
+  border-color: var(--primary);
+  box-shadow: 0 0 40px var(--primary-glow);
+  z-index: 100;
+}
+
+@keyframes card-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.02) rotate(0.5deg); }
+  100% { transform: scale(1); }
 }
 
 .portfolio-wave__header {
@@ -34,6 +48,14 @@
   color: var(--text-main);
   margin-top: 4px;
   display: block;
+}
+
+.portfolio-wave__subtext {
+  font-size: 0.78rem;
+  color: var(--text-dim);
+  margin: 6px 0 0 0;
+  line-height: 1.4;
+  max-width: 180px;
 }
 
 /* ── The Wave Container ── */
@@ -75,16 +97,23 @@
 }
 
 .portfolio-wave.is-boosting .wave-path {
-  animation-duration: 1s !important;
-  fill: rgba(22, 163, 74, 0.2);
+  animation: wave-pulse 0.5s linear infinite !important;
+  fill: #22c55e; /* Vibrant mint */
 }
 .portfolio-wave.is-boosting .wave-path--2 {
-  animation-duration: 1.5s !important;
-  fill: rgba(22, 163, 74, 0.3);
+  animation: wave-pulse 0.8s linear infinite reverse !important;
+  fill: #3b82f6; /* Blue burst */
 }
 .portfolio-wave.is-boosting .wave-path--3 {
-  animation-duration: 2s !important;
-  fill: rgba(6, 182, 212, 0.2);
+  animation: wave-pulse 1.2s linear infinite !important;
+  fill: #a855f7; /* Purple pulse */
+}
+
+@keyframes wave-pulse {
+  0% { transform: scaleY(1) translateX(0); filter: hue-rotate(0deg); }
+  33% { transform: scaleY(2.2) translateX(-5%); filter: hue-rotate(90deg); }
+  66% { transform: scaleY(0.5) translateX(5%); filter: hue-rotate(180deg); }
+  100% { transform: scaleY(1) translateX(0); filter: hue-rotate(360deg); }
 }
 
 .portfolio-wave__boost {
@@ -114,13 +143,22 @@
 }
 
 .portfolio-wave__boost:active {
-  transform: scale(0.95);
+  transform: scale(0.85) rotate(-5deg);
 }
 
 .portfolio-wave__boost--active {
-  background: var(--bg-app);
-  color: var(--text-main);
-  box-shadow: none;
+  animation: boost-shake 0.2s ease-in-out infinite;
+  background: #f59e0b;
+  color: white;
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+}
+
+@keyframes boost-shake {
+  0% { transform: translate(0,0); }
+  25% { transform: translate(2px, 1px); }
+  50% { transform: translate(-1px, -2px); }
+  75% { transform: translate(-2px, 1px); }
+  100% { transform: translate(0,0); }
 }
 
 .wave-content {
@@ -139,6 +177,24 @@
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid var(--border-light);
+  transition: all 0.1s;
+}
+
+.portfolio-wave.is-boosting .wave-value {
+  animation: glitch-text 0.1s infinite;
+  background: #000;
+  color: #0f0;
+  border-color: #0f0;
+  text-transform: uppercase;
+}
+
+@keyframes glitch-text {
+  0% { transform: translate(0); text-shadow: 2px 0 red, -2px 0 blue; }
+  20% { transform: translate(-2px, 2px); text-shadow: -2px 0 red, 2px 0 blue; }
+  40% { transform: translate(-2px, -2px); }
+  60% { transform: translate(2px, 2px); }
+  80% { transform: translate(2px, -2px); }
+  100% { transform: translate(0); }
 }
 
 @media (max-width: 768px) {

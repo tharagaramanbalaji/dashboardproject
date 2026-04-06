@@ -19,12 +19,13 @@ export default function PortfolioWave() {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ width: 12, height: 12 }}>
           <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" /><polyline points="17 6 23 6 23 12" />
         </svg>
-        {isBoosting ? 'Pulse Active' : 'Boost Pulse'}
+        {isBoosting ? 'Syncing...' : 'Play with it'}
       </button>
 
       <div className="portfolio-wave__header">
         <span className="portfolio-wave__label">Portfolio Pulse</span>
         <span className="portfolio-wave__status">Dynamic Activity</span>
+        <p className="portfolio-wave__subtext">Real-time visual monitoring of live asset flow and sync status.</p>
       </div>
 
       <div className="wave-container">
