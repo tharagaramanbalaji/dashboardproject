@@ -174,25 +174,39 @@
 
 /* ── Role badge ── */
 .role-badge {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 6px 14px;
   border-radius: 999px;
-  border: 1px solid transparent;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+}
+
+.role-icon {
+  width: 14px;
+  height: 14px;
 }
 
 .role-badge--admin {
-  background: #dcfce7;
-  color: #15803d;
-  border-color: #86efac;
+  background: linear-gradient(135deg, var(--primary-glow) 0%, rgba(22, 163, 74, 0.2) 100%);
+  color: var(--primary);
+  border: 1px solid rgba(22, 163, 74, 0.3);
+  box-shadow: 0 0 12px var(--primary-glow);
 }
 
 .role-badge--viewer {
-  background: #f1f5f9;
-  color: #475569;
-  border-color: #cbd5e1;
+  background: linear-gradient(135deg, rgba(148, 163, 184, 0.1) 0%, rgba(100, 116, 139, 0.15) 100%);
+  color: var(--text-dim);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 0 10px rgba(148, 163, 184, 0.05);
+}
+
+.role-badge:hover {
+  transform: translateY(-2px);
 }
 
 /* ── Notification bell ── */

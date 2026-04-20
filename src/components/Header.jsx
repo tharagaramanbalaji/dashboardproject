@@ -72,9 +72,24 @@ export default function Header() {
         </div>
 
         {/* Role Badge */}
-        <span className={`role-badge role-badge--${role}`}>
-          {role === 'admin' ? '⚙ Admin' : '👁 Viewer'}
-        </span>
+        <div className={`role-badge role-badge--${role}`}>
+          {role === 'admin' ? (
+            <>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="role-icon">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+              </svg>
+              <span>Admin</span>
+            </>
+          ) : (
+            <>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="role-icon">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              <span>Viewer</span>
+            </>
+          )}
+        </div>
 
         {/* Notification Bell */}
         <button
